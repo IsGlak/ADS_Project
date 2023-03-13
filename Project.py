@@ -1,1 +1,2 @@
-
+def huff():
+    pass
