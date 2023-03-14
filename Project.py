@@ -1,4 +1,1 @@
-import heapq
-
-def huff():
-    pass
+# main  program to execute and try the agorithms
