@@ -2,7 +2,7 @@ class Huff_tree(object):
     def __init__(self,left=None,right=None):
         self.left=left
         self.right=right
-    def info_node(self):
+    def infoNode(self):
         return(self.left,self.right)
 
 def item_freq(itemList):
@@ -24,3 +24,12 @@ def tree(freqList):
         freqList = sorted(node, key=lambda x: x[1], reverse = True)
     return freqList[0][0]
 
+def huffCode(node, memo=''):
+    
+    if type(node) is str:
+        return {node: memo}
+    (left, right) = node.infoNode()
+    code = dict()
+    code.update(huffCode(left, memo + '0'))
+    code.update(huffCode(right, memo + '1'))
+    return code
