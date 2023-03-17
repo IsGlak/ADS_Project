@@ -5,7 +5,7 @@ class Huff_tree(object):
     def infoNode(self):
         return(self.left,self.right)
 
-def item_freq(itemList):
+def item_prob(itemList):
     probDic={}
     for i in itemList:
         if i in probDic:
@@ -14,15 +14,15 @@ def item_freq(itemList):
             probDic[i]+=1
     return probDic
 
-def tree(freqList):
-    while len(freqList)> 1:
-        (a,a1) = freqList[-1]
-        (b,b1) = freqList[-2]
-        freqList = freqList[:-2]
-        node = Huff_tree(a,b)
-        freqList.append(node, a1+b1) 
-        freqList = sorted(node, key=lambda x: x[1], reverse = True)
-    return freqList[0][0]
+def tree(nod):
+    while len(nod)> 1:
+        (a,a1) = nod[-1]
+        (b,b1) = nod[-2]
+        nod = nod[:-2]
+        nod = Huff_tree(a,b)
+        nod.append(X, a1+b1) ##### missing variable 
+        nod = sorted(nod, key=lambda x: x[1], reverse = True)
+    return nod[0][0]
 
 def huffCode(node, memo=''):
     
