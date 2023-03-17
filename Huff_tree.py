@@ -14,14 +14,14 @@ def item_prob(itemList):
             probDic[i]+=1
     return probDic
 
-def tree(nod):
-    while len(nod)> 1:
-        (a,a1) = nod[-1]
-        (b,b1) = nod[-2]
-        nod = nod[:-2]
+def tree(freqList):
+    while len(freqList)> 1:
+        (a,a1) = freqList[-1]
+        (b,b1) = freqList[-2]
+        freqList = freqList[:-2]
         nod = Huff_tree(a,b)
-        nod.append(X, a1+b1) ##### missing variable 
-        nod = sorted(nod, key=lambda x: x[1], reverse = True)
+        freqList.append(nod, a1+b1) 
+        freqList = sorted(nod, key=lambda x: x[1], reverse = True)
     return nod[0][0]
 
 def huffCode(node, memo=''):
