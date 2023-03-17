@@ -9,10 +9,10 @@ def item_prob(itemList):
     probDic={}
     for i in itemList:
         if i in probDic:
-            probDic[i]=1
-        else:
             probDic[i]+=1
-    return probDic
+        else:
+            probDic[i]=1
+    return sorted(probDic.items(), key=lambda x: x[1], reverse=True)
 
 def tree(freqList):
     while len(freqList)> 1:
@@ -20,9 +20,9 @@ def tree(freqList):
         (b,b1) = freqList[-2]
         freqList = freqList[:-2]
         nod = Huff_tree(a,b)
-        freqList.append(nod, a1+b1) 
-        freqList = sorted(nod, key=lambda x: x[1], reverse = True)
-    return nod[0][0]
+        freqList.append((nod, a1+b1)) 
+        freqList = sorted(freqList, key=lambda x: x[1], reverse = True)
+    return freqList[0][0]
 
 def huffCode(node, memo=''):
     
@@ -33,3 +33,12 @@ def huffCode(node, memo=''):
     code.update(huffCode(left, memo + '0'))
     code.update(huffCode(right, memo + '1'))
     return code
+
+def compressString(s):
+    freqList=item_prob(s)    
+    codingTable=huffCode(tree(freqList))
+    for i in s:
+        print(codingTable[i],end="")
+
+if __name__ == '__main__':
+    pass
