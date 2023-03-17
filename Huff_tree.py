@@ -13,3 +13,5 @@ def item_prob(itemList):
         else:
             probDic[i]+=1
     return probDic
+
+
