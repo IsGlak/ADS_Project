@@ -43,7 +43,7 @@ def compressString(s,out=""):
     return out,codingTable
     # in rteal life the compressor is converting the data in bits 
     # but we exemplified with a strin of 1 and 0
-def dicompressString(bitString,codingTable:dict,ind=0,out=""):
+def decompressString(bitString,codingTable,ind=0,out=""):
     codingTable={v: k for k, v in codingTable.items()}
     print(codingTable)
     for i in range(len(bitString)+1):
