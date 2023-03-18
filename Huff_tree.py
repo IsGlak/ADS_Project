@@ -34,11 +34,23 @@ def huffCode(node, memo=''):
     code.update(huffCode(right, memo + '1'))
     return code
 
-def compressString(s):
+def compressString(s,out=""):
+    
     freqList=item_prob(s)    
     codingTable=huffCode(tree(freqList))
     for i in s:
-        print(codingTable[i],end="")
-
-if __name__ == '__main__':
-    pass
+        out+=codingTable[i]
+    return out,codingTable
+    # in rteal life the compressor is converting the data in bits 
+    # but we exemplified with a strin of 1 and 0
+def dicompressString(bitString,codingTable:dict,ind=0,out=""):
+    codingTable={v: k for k, v in codingTable.items()}
+    print(codingTable)
+    for i in range(len(bitString)+1):
+        
+        if bitString[ind:i] in codingTable: 
+            
+            out+=codingTable[bitString[ind:i]]
+            ind=i
+        
+    return out
