@@ -1,10 +1,14 @@
+# Define a class for node in Huffman tree
 class Huff_tree(object):
+    # Initialize a node with left/rigth child node 
     def __init__(self,left=None,right=None):
         self.left=left
         self.right=right
+    # Return the left and rigth child nodes of the current one 
     def infoNode(self):
         return(self.left,self.right)
-
+# Take a list on items and return a list of tuples containing 
+# each item and it's frequency sorted in descending order of freq. 
 def item_prob(itemList):
     probDic={}
     for i in itemList:
