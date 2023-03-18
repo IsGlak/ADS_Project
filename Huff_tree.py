@@ -17,7 +17,9 @@ def item_prob(itemList):
         else:
             probDic[i]=1
     return sorted(probDic.items(), key=lambda x: x[1], reverse=True)
-
+# The function takes a list of tuples containing (item, freq)
+# and return the root node of Huffman tree after merging
+# nodes with lowest frequency. 
 def tree(freqList):
     while len(freqList)> 1:
         (a,a1) = freqList[-1]
@@ -27,9 +29,11 @@ def tree(freqList):
         freqList.append((nod, a1+b1)) 
         freqList = sorted(freqList, key=lambda x: x[1], reverse = True)
     return freqList[0][0]
-
+# Takes a node in the tree and a prefix code and return a dict
+# containing prefixes for each character in tree. 
+# It recursively traverses all the tree recording a 0 for every
+# left branch and 1 for every right branch. 
 def huffCode(node, memo=''):
-    
     if type(node) is str:
         return {node: memo}
     (left, right) = node.infoNode()
@@ -37,7 +41,8 @@ def huffCode(node, memo=''):
     code.update(huffCode(left, memo + '0'))
     code.update(huffCode(right, memo + '1'))
     return code
-
+# This function takes a string as input and returns a compressed
+# version of the string as a string of 0's and 1's.
 def compressString(s,out=""):
     
     freqList=item_prob(s)    
@@ -46,7 +51,11 @@ def compressString(s,out=""):
         out+=codingTable[i]
     return out,codingTable
     # in rteal life the compressor is converting the data in bits 
-    # but we exemplified with a strin of 1 and 0
+    # but we exemplified with a string of 1 and 0.
+
+# Takes as input a compressed bit string, a coding table 
+# and optionall arguments and returns the decompressed version
+# of the input string. 
 def decompressString(bitString,codingTable,ind=0,out=""):
     codingTable={v: k for k, v in codingTable.items()}
     print(codingTable)
