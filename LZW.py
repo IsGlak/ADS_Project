@@ -7,7 +7,10 @@ def createEncoder(): # Create the table to change char to code
 def createReverseEncoder(): # Create the table to change code to char
     return {i:chr(i) for i in range(256)}
 
-def LZWCompress(encoder,str,out=[],memo="",size=256):
+# Function to compress the input data 
+# with the normal encoder, as with the reverse encoder it is not possible 
+# to decompress the data 
+def LZWCompress(encoder,str,out=[],memo="",size=256):  
 
     for char in str:
         memChar = memo + char
@@ -25,6 +28,9 @@ def LZWCompress(encoder,str,out=[],memo="",size=256):
         out.append(encoder[memo])
     return out
 
+# Function to decompress the input data
+# by useing the reverse encoder as we will look for the key 
+# and give the ccorresponding value from the dictionary. 
 def LZWDecompress(encoder,compressed,size=256):
     result = StringIO()
     word = chr(compressed.pop(0))
